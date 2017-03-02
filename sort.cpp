@@ -379,7 +379,7 @@ int main(int argc, char* argv[])
 
     if (algorithm == "selection")
     {
-      print(a, size);
+    //   print(a, size);
       sort.selectionSort(a,size);
       print(a, size);
     }
