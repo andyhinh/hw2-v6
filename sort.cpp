@@ -355,8 +355,8 @@ void input(BigNumber *a, string & filename, int digitsPerNode)
   }
 }
 
-void merge_sort(int [],int ,int );
-void merge(int [],int,int ,int );
+void merge_sort(BigNumber *a,int ,int );
+void merge(BigNumber *a,int,int ,int );
 
 int main(int argc, char* argv[])
 {
@@ -415,71 +415,61 @@ int main(int argc, char* argv[])
 
 
 
-
-    int n;
-    cout<<"Enter the size of the array"<<endl;
-    cin>>n;
-    int b[n];
-    cout<<"Enter the elements in the array"<<endl;
-    for(int i=1;i<=n;i++)
-    {
-        cin>>b[i];
-    }
-
     cout<<"sorting using merge sort"<<endl;
-    int p=1,r=n;
+    int p=1;
+    int r = size;
 
-    merge_sort(b,p,r);
+    merge_sort(a,p,r);
 
    cout<<"sorted form"<<endl;
-   for(int i=1;i<=n;i++)
+   for(int i = 1;i <= size; i++)
    {
-       cout<<"b["<<i<<"]="<<b[i]<<endl;
+    //    cout<<"a[" << i << "]=" << a[i] << endl;
    }
+
+   print(a, size);
      return 0;
 
 
 }
-void merge_sort(int b[],int p,int r)
+void merge_sort(BigNumber *a, int p,int r)
     {
         int q;
         if(p<r)
         {
          q=(p+r)/2;
-         merge_sort(b,p,q);
-         merge_sort(b,q+1,r);
-         merge(b,p,q,r);
+         merge_sort(a,p,q);
+         merge_sort(a,q+1,r);
+         merge(a,p,q,r);
         }
     }
 
- void merge(int b[],int p,int q,int r)
+ void merge(BigNumber *a,int p, int q,int r)
     {
         cout<<"Entered merge"<<endl;
         int n1=q-p+1;
         int n2=r-q;
-        int L[n1+1];
-        int R[n2+1];
+        BigNumber *L[n1+1];
+        BigNumber *R[n2+1];
         for(int i=1;i<=n1;i++)
         {
-            L[i]=b[p+i-1];
+            *L[i]=a[p+i-1];
         }
         for(int j=1;j<=n2;j++)
         {
-            R[j]=b[q+j];
+            *R[j]=a[q+j];
         }
-        L[n1+1]=999;
-        R[n2+1]=999;
         int i=1, j=1;
         for(int k=p;k<=r;k++)
         {
             if(L[i]<=R[j])
             {
-                b[k]=L[i];
+                a[k]=*L[i];
                 i=i+1;
             }
             else
             {
-                b[k]=R[j];
+                a[k]=*R[j];
                 j=j+1;
             }
         }
