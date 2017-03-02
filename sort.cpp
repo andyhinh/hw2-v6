@@ -392,7 +392,17 @@ int main(int argc, char* argv[])
     }
     if (algorithm == "quick")
     {
-
+        /****************Insertion Sort - Working****************/
+        // for (int i = 0; i < size - 1; i++)
+        // {
+        //     for (int j = i; j < size; j++)
+        //     {
+        //         if (a[j] < a[i])
+        //         {
+        //             a[i].swap(a[j]);
+        //         }
+        //     }
+        // }
     }
     if (algorithm == "merge")
     {
@@ -403,57 +413,46 @@ int main(int argc, char* argv[])
 
     }
 
-    /****************Insertion Sort - Working****************/
-    // for (int i = 0; i < size - 1; i++)
-    // {
-    //     for (int j = i; j < size; j++)
-    //     {
-    //         if (a[j] < a[i])
-    //         {
-    //             a[i].swap(a[j]);
-    //         }
-    //     }
-    // }
 
 
 
     int n;
     cout<<"Enter the size of the array"<<endl;
     cin>>n;
-    int a[n];
+    int b[n];
     cout<<"Enter the elements in the array"<<endl;
     for(int i=1;i<=n;i++)
     {
-        cin>>a[i];
+        cin>>b[i];
     }
 
     cout<<"sorting using merge sort"<<endl;
     int p=1,r=n;
 
-    merge_sort(a,p,r);
+    merge_sort(b,p,r);
 
    cout<<"sorted form"<<endl;
    for(int i=1;i<=n;i++)
    {
-       cout<<"a["<<i<<"]="<<a[i]<<endl;
+       cout<<"b["<<i<<"]="<<b[i]<<endl;
    }
      return 0;
 
 
 }
-void merge_sort(int a[],int p,int r)
+void merge_sort(int b[],int p,int r)
     {
         int q;
         if(p<r)
         {
          q=(p+r)/2;
-         merge_sort(a,p,q);
-         merge_sort(a,q+1,r);
-         merge(a,p,q,r);
+         merge_sort(b,p,q);
+         merge_sort(b,q+1,r);
+         merge(b,p,q,r);
         }
     }
 
- void merge(int a[],int p,int q,int r)
+ void merge(int b[],int p,int q,int r)
     {
         cout<<"Entered merge"<<endl;
         int n1=q-p+1;
@@ -462,11 +461,11 @@ void merge_sort(int a[],int p,int r)
         int R[n2+1];
         for(int i=1;i<=n1;i++)
         {
-            L[i]=a[p+i-1];
+            L[i]=b[p+i-1];
         }
         for(int j=1;j<=n2;j++)
         {
-            R[j]=a[q+j];
+            R[j]=b[q+j];
         }
         L[n1+1]=999;
         R[n2+1]=999;
@@ -475,12 +474,12 @@ void merge_sort(int a[],int p,int r)
         {
             if(L[i]<=R[j])
             {
-                a[k]=L[i];
+                b[k]=L[i];
                 i=i+1;
             }
             else
             {
-                a[k]=R[j];
+                b[k]=R[j];
                 j=j+1;
             }
         }
