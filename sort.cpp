@@ -130,9 +130,14 @@ public:
         other.head = temp;
     }
 
+    void traverse()
+    {
+        
+    }
+
+    Node* head = nullptr;
+    Node* tail = nullptr;
 private:
-    Node* head = 0;
-    Node* tail = 0;
 };
 
 class BigNumber
@@ -169,6 +174,38 @@ public:
         data = other.data;
         return *this;
     }
+
+    bool operator== (BigNumber const & other) const
+    {
+        BigNumber const & a = *this;
+        BigNumber const & b = other;
+        if (a.isNegative && b.isNegative || !a.isNegative && !b.isNegative)
+        {
+            if (a.data.size() != b.data.size())
+            {
+                return false;
+            }
+            else
+            {
+                Node* current1 = a.data.head;
+                Node* current2 = b.data.head;
+                while (current1->next != nullptr)
+                {
+                    if (current1->num != current2->num)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        current1 = current1->next;
+                        current2 = current2->next;
+                    }
+                }
+                return true;
+            }
+        }
+    }
+
     bool operator< (BigNumber const & other) const
     {
         BigNumber const & a = *this;
@@ -186,14 +223,14 @@ public:
         bool result = false;
         if (a.data.size() < b.data.size())
         {
-            //return true;
-            result = true;
+            return true;
+            // result = true;
         }
         else
             if (a.data.size() > b.data.size())
             {
-                //return false;
-                result = false;
+                return false;
+                // result = false;
             }
             else
                 if (a.data.size() == b.data.size())
@@ -203,15 +240,15 @@ public:
                     {
                         if (a.data.at(index).num < b.data.at(index).num)
                         {
-                            //return true;
-                            result = true;
-                            break;
+                            return true;
+                            // result = true;
+                            // break;
                         }
                         if (a.data.at(index).num > b.data.at(index).num)
                         {
-                            //return false;
-                            result = false;
-                            break;
+                            return false;
+                            // result = false;
+                            // break;
                         }
                         if (a.data.at(index).num == b.data.at(index).num)
                         {
@@ -220,11 +257,11 @@ public:
                         index++;
                     }
                 }
-        if (isNegative)
-        {
-            result = !result;
-        }
-        return result;
+        // if (isNegative)
+        // {
+        //     result = !result;
+        // }
+        // return result;
     }
 
     void print() const
@@ -355,8 +392,8 @@ void input(BigNumber *a, string & filename, int digitsPerNode)
   }
 }
 
-void merge_sort(BigNumber *a,int ,int );
-void merge(BigNumber *a,int,int ,int );
+void merge_sort(BigNumber *a,int p,int r);
+void merge(BigNumber *a,int p,int q,int r);
 
 int main(int argc, char* argv[])
 {
@@ -469,9 +506,16 @@ void merge_sort(BigNumber *a, int p,int r)
         cout << "Before for-3: " << endl;        
         for(int k=p;k<=r;k++)
         {
-            cout << "if(L[i]<=R[j])" << endl;
-            if(L[i]<=R[j])
+            cout << "Line 509: if(L[i]<=R[j])" << endl;
+            if(L[i] < R[j])
             {
+                cout << "Line 512: a[k]=L[i] " << endl;
+                a[k]=L[i];
+                i=i+1;
+            }
+            if (L[i] == R[j])
+            {
+                cout << "Line 518: a[k]=L[i] " << endl;
                 a[k]=L[i];
                 i=i+1;
             }
